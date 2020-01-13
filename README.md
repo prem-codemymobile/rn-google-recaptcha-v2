@@ -3,6 +3,9 @@
 ##### Implement Google recaptcha v2 in React Native (both Android and iOS)
 Our package uses `react-native-webview` under the hood to bring you the functionality of auto-resizable google recaptcha v2 using webview. This solves the problem of resizing webview content when using google recaptcha v2.
 
+## Sample App
+A [Sample App](https://github.com/prem-codemymobile/rn-google-recaptcha-v2/tree/master/Example) is available to help with sample usage and debugging issues.
+
 ## Installation
 
 #### 1. Add rn-google-recaptcha-v2 to your project
