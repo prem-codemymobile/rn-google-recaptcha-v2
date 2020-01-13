@@ -16,38 +16,9 @@ For npm use
 $ npm install --save rn-google-recaptcha-v2
 ```
 
-#### 2. Link react-native-webview dependency
+#### 2. Add react-native-webview dependency to your project
 
-From react-native 0.60 autolinking will take care of the link step but don't forget to run `pod install`
-
-React Native modules that include native Objective-C, Swift, Java, or Kotlin code have to be "linked" so that the compiler knows to include them in the app.
-
-```
-$ react-native link react-native-webview
-```
-
-iOS:
-
-If using cocoapods in the `ios/` directory run
-```
-$ pod install
-```
-
-Android - react-native-webview version <6:
-This module does not require any extra step after running the link command 🎉
-
-Android - react-native-webview version >=6.X.X:
-Please make sure AndroidX is enabled in your project by editting `android/gradle.properties` and adding 2 lines:
-
-```
-android.useAndroidX=true
-android.enableJetifier=true
-```
-
-For Android manual installation, please refer to [this article](https://engineering.brigad.co/demystifying-react-native-modules-linking-964399ec731b) where you can find detailed step on how to link any react-native project.
-
-For iOS, while you can manually link the old way using [react-native own tutorial](https://facebook.github.io/react-native/docs/linking-libraries-ios), we find it easier to use cocoapods.
-If you wish to use cocoapods and haven't set it up yet, please instead refer to [that article](https://engineering.brigad.co/demystifying-react-native-modules-linking-ae6c017a6b4a).
+Follow the instructions on the [React Native WebView Getting Started Guide](https://github.com/react-native-community/react-native-webview/blob/master/docs/Getting-Started.md) to add `react-native-webview` dependency to your project
 
 ## Usage
 
@@ -110,4 +81,6 @@ export default class App extends Component  {
 - **`languageCode`** _(String)_ - Language to be display of captcha form. Can be found at [this link](https://developers.google.com/recaptcha/docs/language)
 
 
-**MIT Licensed**
+## License
+
+MIT

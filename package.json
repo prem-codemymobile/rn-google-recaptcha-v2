@@ -2,6 +2,7 @@
 	"name": "rn-google-recaptcha-v2",
 	"version": "2.1.1",
 	"description": "Implement Google recaptcha v2 in React Native (both Android and iOS)",
+	"author": "prem-codemymobile",
 	"main": "index.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1"
@@ -16,12 +17,7 @@
 		"android",
 		"rn"
 	],
-	"author": "prem-codemymobile",
-	"license": "MIT",
-	"bundledDependencies": ["react-native-webview"],
-	"dependencies": {
-		"react-native-webview": "^8.0.3"
-	},
+	"dependencies": {},
 	"peerDependencies": {
 		"react": "*",
 		"react-native": "*"
@@ -29,5 +25,6 @@
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/prem-codemymobile/rn-google-recaptcha-v2.git"
-	}
+	},
+	"license": "MIT"
 }

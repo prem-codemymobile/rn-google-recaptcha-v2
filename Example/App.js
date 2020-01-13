@@ -6,8 +6,8 @@ import {
 } from 'react-native';
 import GoogleReCaptcha from 'rn-google-recaptcha-v2';
 
-const siteKey = '6Lcv7LoUAAAAAG5drxQTeMQ6DRfCOFN05eKHXHip';
-const baseUrl = 'http://localhost';
+const siteKey = 'you_site_key';
+const baseUrl = 'base_url';
 
 export default class App extends Component {
   constructor(props) {
