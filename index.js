@@ -1,35 +1,5 @@
 import React from 'react';
 import { WebView } from 'react-native-webview';
-const setContentHeightObserverJsCode = `(${String(function () {
-    window.setupObservers = function () {
-        this.document.body.style.visibility = 'visible';
-        const iframes = document.getElementsByTagName('iframe');
-        let iframe = iframes[iframes.length - 1];
-        if (
-            iframe &&
-            iframe.parentElement &&
-            iframe.parentElement.parentElement
-        ) {
-            var target = iframe.parentElement.parentElement;
-            var observer = new MutationObserver(function (mutations) {
-                mutations.forEach(function () {
-                    let contentParams = {
-                        height: iframe.clientHeight,
-                        visibility: target.style.visibility,
-                    };
-                    window.ReactNativeWebView.postMessage(
-                        `CONTENT_PARAMS:${JSON.stringify(contentParams)}`,
-                    );
-                });
-            });
-            observer.observe(target, {
-                attributes: true,
-                attributeFilter: ['style'],
-            });
-        }
-    };
-    setTimeout(() => window.setupObservers(), 2000);
-})})();`;
 /**
  *
  * @param {*} onMessage: callback after received response, error of Google captcha or when user cancel
@@ -49,16 +19,47 @@ const GoogleReCaptcha = ({ onMessage, siteKey, style, url, languageCode }) => {
             'en'}"></script>
 				<script type="text/javascript">
 					var onloadCallback = function () { };
-					var onDataCallback = function (response) { 
+					
+                    var onDataCallback = function (response) { 
 						window.ReactNativeWebView.postMessage(response) 
 					};
-					var onDataExpiredCallback = function (error) { 
+					
+                    var onDataExpiredCallback = function (error) { 
 						window.ReactNativeWebView.postMessage("expired"); 
 						setTimeout(() => window.setupObservers(), 1000);
 					};
+
 					var onDataErrorCallback = function (error) { 
 						window.ReactNativeWebView.postMessage("error"); 
 					}
+
+                    window.setupObservers = function () {
+                        this.document.body.style.visibility = 'visible';
+                        const iframes = document.getElementsByTagName('iframe');
+                        let iframe = iframes[iframes.length - 1];
+                        if (
+                            iframe &&
+                            iframe.parentElement &&
+                            iframe.parentElement.parentElement
+                        ) {
+                            var target = iframe.parentElement.parentElement;
+                            var observer = new MutationObserver(function (mutations) {
+                                mutations.forEach(function () {
+                                    let contentParams = {
+                                        height: iframe.clientHeight,
+                                        visibility: target.style.visibility,
+                                    };
+                                    window.ReactNativeWebView.postMessage("CONTENT_PARAMS:" + JSON.stringify(contentParams));
+                                });
+                            });
+                            observer.observe(target, {
+                                attributes: true,
+                                attributeFilter: ['style'],
+                            });
+                        }
+                    };
+                    
+                    setTimeout(window.setupObservers, 2000)
 				</script>
 			</head>
 			<body style="visibility:hidden;">
@@ -79,7 +80,6 @@ const GoogleReCaptcha = ({ onMessage, siteKey, style, url, languageCode }) => {
             mixedContentMode={'always'}
             onMessage={onMessage}
             javaScriptEnabled={true}
-            injectedJavaScript={setContentHeightObserverJsCode}
             automaticallyAdjustContentInsets={true}
             style={[{ backgroundColor: 'transparent', width: '100%' }, style]}
             source={{
